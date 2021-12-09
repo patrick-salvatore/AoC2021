@@ -1,0 +1,13 @@
+from os import read
+
+def run (FILE_NAME):
+    f = open(FILE_NAME,"r")
+
+    print("hello, world")
+
+if __name__ =='__main__':
+    if len(sys.argv) < 1: 
+        run("sample.txt")
+    else: 
+        run("input.txt")
+         

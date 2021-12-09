@@ -1,0 +1,20 @@
+const fs = require("fs");
+
+const flags = process.argv.slice(2);
+const INPUT_FLAG = flags[0];
+
+const FILE = INPUT_FLAG === "1" ? "input.txt" : "sample.txt";
+
+const format_string = (contents) => {}
+
+const part1 = (input) => {};
+
+const part2 = (input) => {};
+
+fs.readFile(FILE, "utf8", (_, contents) => {
+
+  console.log("---------------");
+  console.log(`part1 answer: ${part1(raw)}\n`);
+  console.log(`part2 answer: ${part2(raw)}`);
+  console.log("---------------");
+});
