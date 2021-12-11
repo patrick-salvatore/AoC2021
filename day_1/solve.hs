@@ -1,16 +1,19 @@
 module Main where
 
-import Control.Monad
-import Data.List
+import           Control.Monad
+import           Data.List
 
 cnv1 :: [Int] -> [[Int]]
-cnv1 [] = []
-cnv1 [_] = []
-cnv1 (ft : sd : rest) = [ft, sd] : cnv1 (sd : rest)
+cnv1 []           = []
+cnv1 [_]          = []
+cnv1 (ft:sd:rest) = [ft, sd] : cnv1 (sd : rest)
 
 checkIfGreater :: [Int] -> Int
 checkIfGreater [_] = 0
-checkIfGreater list = if head list < list !! 1 then 1 else 0
+checkIfGreater list =
+  if head list < list !! 1
+    then 1
+    else 0
 
 part1 inp' = print $ sum $ map checkIfGreater $ cnv1 inp'
 
@@ -28,6 +31,5 @@ main :: IO ()
 main = do
   inp <- lines <$> readFile "input.txt"
   let inp' = read <$> inp :: [Int]
-
   part1 inp'
   part2 inp'

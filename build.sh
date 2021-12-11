@@ -29,7 +29,7 @@ then
     exit 1 
 fi
 
-langs_array=(hs go js ts, py)
+langs_array=(hs go js ts py)
 day_folder="day_$DAY"
 input_file="$day_folder/input.txt"
 
