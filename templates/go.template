@@ -7,6 +7,10 @@ import (
 	"strings"
 )
 
+func part_1() {}
+
+func part_2() {}
+
 func main() {
 	var FILE_NAME string
 
@@ -19,7 +23,10 @@ func main() {
 	}
 
 	contents := string(f)
-	slices := strings.SplitAfter(contents, " ")
+	slices := strings.Split(contents, " ")
 
-	fmt.Println("%v", slices)
+	println("---------------")
+	fmt.Printf("part1 answer: %v \n", part_1())
+	fmt.Printf("part2 answer: %v \n", part_2())
+	println("---------------")
 }

@@ -87,7 +87,6 @@ def part2(lines):
 
 
 def run(FILE_NAME):
-
     with open(FILE_NAME, "r") as f:
         data = f.read()
 

@@ -13,65 +13,84 @@ func remove_index(s int, slice []int) []int {
 }
 
 func part_1(lst []int) int {
-	NUMBER_OF_DAYS := 256
-	results := lst
+	fish := make([]int, len(lst))
+	copy(fish, lst)
 
-	for NUMBER_OF_DAYS > 0 {
-		for i := 0; i < len(results); i++ {
-			if results[i] == 0 {
-				results = append(results, 9)
-				results[i] = 7
+	for i := 0; i < 80; i++ {
+		newFish := make([]int, len(fish))
+
+		for i := 0; i < len(fish); i++ {
+			timer := fish[i]
+			if timer == 0 {
+				newFish[i] = 6
+				newFish = append(newFish, 8)
+			} else {
+				newFish[i] = timer - 1
 			}
-			results[i] -= 1
 		}
 
-		NUMBER_OF_DAYS -= 1
+		fish = newFish
 	}
 
-	return len(results)
+	return len(fish)
 }
 
-func updateMap(_map map[int][]int) {
-	//  values = Array.from(map.values());
-	// for (let timer = 0; timer <= 8; timer++) {
-	//    numberOfFish = values[timer];
-	//   if (numberOfFish === 0) continue;
+func get_map_values(m map[int]int) []int {
+	values := make([]int, len(m))
 
-	//   if (timer === 0) {
-	// 	map.set(0, map.get(0) - numberOfFish);
-	// 	map.set(6, map.get(6) + numberOfFish);
-	// 	map.set(8, map.get(8) + numberOfFish);
-	//   } else {
-	// 	map.set(timer, map.get(timer) - numberOfFish);
-	// 	map.set(timer - 1, map.get(timer - 1) + numberOfFish);
-	//   }
-	// }
+	for k, v := range m {
+		values[k] = v
+	}
+
+	return values
 }
 
-func part_2(lst []int) {
-	var fish = make(map[int][]int)
+func part_2(lst []int) int {
+	fish_map := make(map[int]int, 8)
 
-	fish[0] = []int{0, 0}
-	fish[1] = []int{1, 0}
-	fish[2] = []int{2, 0}
-	fish[3] = []int{3, 0}
-	fish[4] = []int{4, 0}
-	fish[5] = []int{5, 0}
-	fish[6] = []int{6, 0}
-	fish[7] = []int{7, 0}
-	fish[8] = []int{8, 0}
+	fish_map[0] = 0
+	fish_map[1] = 0
+	fish_map[2] = 0
+	fish_map[3] = 0
+	fish_map[4] = 0
+	fish_map[5] = 0
+	fish_map[6] = 0
+	fish_map[7] = 0
+	fish_map[8] = 0
 
 	for i := 0; i < len(lst); i++ {
 		timer := lst[i]
-		fish[timer][1] += 1
+		fish_map[timer] += 1
 	}
 
-	// Simulate 256 days
 	for i := 0; i < 256; i++ {
-		updateMap(fish)
+		map_vals := get_map_values(fish_map)
+
+		for timer := 0; timer <= 8; timer++ {
+			numFish := map_vals[timer]
+
+			if numFish == 0 {
+				continue
+			}
+
+			if timer == 0 {
+				fish_map[0] = fish_map[0] - numFish
+				fish_map[6] = fish_map[6] + numFish
+				fish_map[8] = fish_map[8] + numFish
+			} else {
+				fish_map[timer] = fish_map[timer] - numFish
+				fish_map[timer-1] += numFish
+			}
+		}
 	}
 
-	// 	return Array.from(fish.values()).reduce((a, b) => a + b, 0);
+	total := 0
+
+	for _, v := range get_map_values(fish_map) {
+		total += v
+	}
+
+	return total
 }
 
 func main() {
@@ -94,6 +113,8 @@ func main() {
 		ints[i], _ = strconv.Atoi(s)
 	}
 
-	fmt.Printf("%v \n", part_1(ints))
-
+	println("---------------")
+	fmt.Printf("part1 answer: %v \n", part_1(ints))
+	fmt.Printf("\npart2 answer: %v \n", part_2(ints))
+	println("---------------")
 }

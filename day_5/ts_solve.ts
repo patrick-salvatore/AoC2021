@@ -1,8 +1,7 @@
 // deno-lint-ignore-file camelcase
 import { parse } from "https://deno.land/std/flags/mod.ts";
 
-
-export const split_line_break = (str:string) => {
+export const split_line_break = (str: string) => {
   return str.split(/\r?\n/);
 };
 
@@ -75,7 +74,6 @@ const part2 = (lines: string[]) => {
 const FILE_NAME = parse(Deno.args)["sample"] ? "sample.txt" : "input.txt";
 Deno.readTextFile(FILE_NAME)
   .then((data) => {
-
     console.log("---------------");
     console.log(`part1 answer: ${part1(split_line_break(data))}\n`);
     console.log(`part1 answer: ${part2(split_line_break(data))}\n`);

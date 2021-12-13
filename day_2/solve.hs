@@ -12,6 +12,7 @@ change' x =
     then (-1) * snd x
     else snd x
 
+multiply :: Int -> Int -> Int
 multiply x y = x * y
 
 main :: IO ()
